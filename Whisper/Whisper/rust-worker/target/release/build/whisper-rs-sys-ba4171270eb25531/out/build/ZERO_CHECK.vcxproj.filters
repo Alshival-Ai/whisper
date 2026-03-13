@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\SamuelCavazos\Documents\whisper\Whisper\Whisper\rust-worker\target\release\build\whisper-rs-sys-ba4171270eb25531\out\build\CMakeFiles\9c0e41d3690f3c32f22de654d3e69577\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{8536C134-0D28-343A-B373-456155419E30}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

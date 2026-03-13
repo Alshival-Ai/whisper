@@ -1,0 +1,391 @@
+running: "\\\\?\\C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" "-Wdev" "--debug-output" "C:\\Users\\SamuelCavazos\\Documents\\whisper\\Whisper\\Whisper\\rust-worker\\target\\release\\build\\whisper-rs-sys-ba4171270eb25531\\out\\whisper.cpp" "-B" "C:\\Users\\SamuelCavazos\\Documents\\whisper\\Whisper\\Whisper\\rust-worker\\target\\release\\build\\whisper-rs-sys-ba4171270eb25531\\out\\build" "-G" "Visual Studio 18 2026" "-Thost=x64" "-Ax64" "-DBUILD_SHARED_LIBS=OFF" "-DWHISPER_ALL_WARNINGS=OFF" "-DWHISPER_ALL_WARNINGS_3RD_PARTY=OFF" "-DWHISPER_BUILD_TESTS=OFF" "-DWHISPER_BUILD_EXAMPLES=OFF" "-DGGML_METAL=OFF" "-DCMAKE_BUILD_TYPE=Release" "-DGGML_OPENMP=OFF" "-DCMAKE_INSTALL_PREFIX=C:\\Users\\SamuelCavazos\\Documents\\whisper\\Whisper\\Whisper\\rust-worker\\target\\release\\build\\whisper-rs-sys-ba4171270eb25531\\out" "-DCMAKE_C_FLAGS= -nologo -MD -Brepro -W0" "-DCMAKE_C_FLAGS_RELEASE= -nologo -MD -Brepro -W0" "-DCMAKE_CXX_FLAGS= /utf-8 -nologo -MD -Brepro -W0" "-DCMAKE_CXX_FLAGS_RELEASE= /utf-8 -nologo -MD -Brepro -W0" "-DCMAKE_ASM_FLAGS= -nologo -MD -Brepro -W0" "-DCMAKE_ASM_FLAGS_RELEASE= -nologo -MD -Brepro -W0" "-DCMAKE_VERBOSE_MAKEFILE:BOOL=ON"
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/CMakeLists.txt
+CMake Warning (dev) at C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile):
+  Policy CMP0066 is not set: Honor per-config flags in try_compile()
+  source-file signature.  Run "cmake --help-policy CMP0066" for policy
+  details.  Use the cmake_policy command to set the policy and suppress this
+  warning.
+
+  For compatibility with older versions of CMake, try_compile is not honoring
+  caller config-specific compiler flags (e.g.  CMAKE_C_FLAGS_DEBUG) in the
+  test project.
+Call Stack (most recent call first):
+  C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)
+  CMakeLists.txt:2 (project)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [3]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/CMakeLists.txt
+                [2]	C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeTestCCompiler.cmake
+                [1]	C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake
+CMake Warning (dev) at C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile):
+  Policy CMP0066 is not set: Honor per-config flags in try_compile()
+  source-file signature.  Run "cmake --help-policy CMP0066" for policy
+  details.  Use the cmake_policy command to set the policy and suppress this
+  warning.
+
+  For compatibility with older versions of CMake, try_compile is not honoring
+  caller config-specific compiler flags (e.g.  CMAKE_C_FLAGS_DEBUG) in the
+  test project.
+Call Stack (most recent call first):
+  C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)
+  CMakeLists.txt:2 (project)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [3]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/CMakeLists.txt
+                [2]	C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeTestCXXCompiler.cmake
+                [1]	C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake
+   Entering             C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/CMakeLists.txt
+CMake Warning (dev) at C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineASMCompiler.cmake:234 (message):
+  Policy CMP194 is not set: MSVC is not an assembler for language ASM.  Run
+  "cmake --help-policy CMP194" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  ggml/CMakeLists.txt:2 (project)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [2]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/CMakeLists.txt
+                [1]	C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineASMCompiler.cmake
+   Entering             C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/CMakeLists.txt
+   Entering             C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/ggml-cpu
+   Called from: [2]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/CMakeLists.txt
+                [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/CMakeLists.txt
+   Returning to         C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src
+   Called from: [2]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/CMakeLists.txt
+                [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/CMakeLists.txt
+   Returning to         C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/CMakeLists.txt
+   Returning to         C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/CMakeLists.txt
+   Entering             C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/src
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/CMakeLists.txt
+   Returning to         C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/CMakeLists.txt
+CMake Warning (dev) in ggml/CMakeLists.txt:
+  Policy CMP0200 is not set: Location and configuration selection for
+  imported targets is more consistent.  Run "cmake --help-policy CMP0200" for
+  policy details.  Use the cmake_policy command to set the policy and
+  suppress this warning.
+
+  Configuration selection for imported target "Threads::Threads" selected
+  configuration "(none)", but would select configuration "DEBUG" under the
+  NEW policy.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in src/CMakeLists.txt:
+  Policy CMP0200 is not set: Location and configuration selection for
+  imported targets is more consistent.  Run "cmake --help-policy CMP0200" for
+  policy details.  Use the cmake_policy command to set the policy and
+  suppress this warning.
+
+  Configuration selection for imported target "Threads::Threads" selected
+  configuration "(none)", but would select configuration "DEBUG" under the
+  NEW policy.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in ggml/CMakeLists.txt:
+  Policy CMP0200 is not set: Location and configuration selection for
+  imported targets is more consistent.  Run "cmake --help-policy CMP0200" for
+  policy details.  Use the cmake_policy command to set the policy and
+  suppress this warning.
+
+  Configuration selection for imported target "Threads::Threads" selected
+  configuration "(none)", but would select configuration "RELEASE" under the
+  NEW policy.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in ggml/CMakeLists.txt:
+  Policy CMP0200 is not set: Location and configuration selection for
+  imported targets is more consistent.  Run "cmake --help-policy CMP0200" for
+  policy details.  Use the cmake_policy command to set the policy and
+  suppress this warning.
+
+  Configuration selection for imported target "Threads::Threads" selected
+  configuration "(none)", but would select configuration "MINSIZEREL" under
+  the NEW policy.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in ggml/CMakeLists.txt:
+  Policy CMP0200 is not set: Location and configuration selection for
+  imported targets is more consistent.  Run "cmake --help-policy CMP0200" for
+  policy details.  Use the cmake_policy command to set the policy and
+  suppress this warning.
+
+  Configuration selection for imported target "Threads::Threads" selected
+  configuration "(none)", but would select configuration "RELWITHDEBINFO"
+  under the NEW policy.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in src/CMakeLists.txt:
+  Policy CMP0200 is not set: Location and configuration selection for
+  imported targets is more consistent.  Run "cmake --help-policy CMP0200" for
+  policy details.  Use the cmake_policy command to set the policy and
+  suppress this warning.
+
+  Configuration selection for imported target "Threads::Threads" selected
+  configuration "(none)", but would select configuration "RELEASE" under the
+  NEW policy.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in src/CMakeLists.txt:
+  Policy CMP0200 is not set: Location and configuration selection for
+  imported targets is more consistent.  Run "cmake --help-policy CMP0200" for
+  policy details.  Use the cmake_policy command to set the policy and
+  suppress this warning.
+
+  Configuration selection for imported target "Threads::Threads" selected
+  configuration "(none)", but would select configuration "MINSIZEREL" under
+  the NEW policy.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in src/CMakeLists.txt:
+  Policy CMP0200 is not set: Location and configuration selection for
+  imported targets is more consistent.  Run "cmake --help-policy CMP0200" for
+  policy details.  Use the cmake_policy command to set the policy and
+  suppress this warning.
+
+  Configuration selection for imported target "Threads::Threads" selected
+  configuration "(none)", but would select configuration "RELWITHDEBINFO"
+  under the NEW policy.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in CMakeLists.txt:
+  Policy CMP0082 is not set: Install rules from add_subdirectory() are
+  interleaved with those in caller.  Run "cmake --help-policy CMP0082" for
+  policy details.  Use the cmake_policy command to set the policy and
+  suppress this warning.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/CMakeLists.txt
+CMake Warning (dev) at ggml/src/CMakeLists.txt:192 (add_library):
+  Policy CMP0156 is not set: De-duplicate libraries on link lines based on
+  linker capabilities.  Run "cmake --help-policy CMP0156" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Since the policy is not set, legacy libraries de-duplication strategy will
+  be applied.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/CMakeLists.txt
+CMake Warning (dev) at ggml/src/CMakeLists.txt:192 (add_library):
+  Policy CMP0156 is not set: De-duplicate libraries on link lines based on
+  linker capabilities.  Run "cmake --help-policy CMP0156" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Since the policy is not set, legacy libraries de-duplication strategy will
+  be applied.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/CMakeLists.txt
+CMake Warning (dev) at ggml/src/CMakeLists.txt:192 (add_library):
+  Policy CMP0156 is not set: De-duplicate libraries on link lines based on
+  linker capabilities.  Run "cmake --help-policy CMP0156" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Since the policy is not set, legacy libraries de-duplication strategy will
+  be applied.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/CMakeLists.txt
+CMake Warning (dev) at ggml/src/CMakeLists.txt:192 (add_library):
+  Policy CMP0156 is not set: De-duplicate libraries on link lines based on
+  linker capabilities.  Run "cmake --help-policy CMP0156" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Since the policy is not set, legacy libraries de-duplication strategy will
+  be applied.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/CMakeLists.txt
+CMake Warning (dev) at ggml/src/CMakeLists.txt:259 (add_library):
+  Policy CMP0156 is not set: De-duplicate libraries on link lines based on
+  linker capabilities.  Run "cmake --help-policy CMP0156" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Since the policy is not set, legacy libraries de-duplication strategy will
+  be applied.
+Call Stack (most recent call first):
+  ggml/src/ggml-cpu/CMakeLists.txt:22 (ggml_add_backend_library)
+  ggml/src/CMakeLists.txt:444 (ggml_add_cpu_backend_variant_impl)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/CMakeLists.txt
+CMake Warning (dev) at ggml/src/CMakeLists.txt:259 (add_library):
+  Policy CMP0156 is not set: De-duplicate libraries on link lines based on
+  linker capabilities.  Run "cmake --help-policy CMP0156" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Since the policy is not set, legacy libraries de-duplication strategy will
+  be applied.
+Call Stack (most recent call first):
+  ggml/src/ggml-cpu/CMakeLists.txt:22 (ggml_add_backend_library)
+  ggml/src/CMakeLists.txt:444 (ggml_add_cpu_backend_variant_impl)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/CMakeLists.txt
+CMake Warning (dev) at ggml/src/CMakeLists.txt:259 (add_library):
+  Policy CMP0156 is not set: De-duplicate libraries on link lines based on
+  linker capabilities.  Run "cmake --help-policy CMP0156" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Since the policy is not set, legacy libraries de-duplication strategy will
+  be applied.
+Call Stack (most recent call first):
+  ggml/src/ggml-cpu/CMakeLists.txt:22 (ggml_add_backend_library)
+  ggml/src/CMakeLists.txt:444 (ggml_add_cpu_backend_variant_impl)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/CMakeLists.txt
+CMake Warning (dev) at ggml/src/CMakeLists.txt:259 (add_library):
+  Policy CMP0156 is not set: De-duplicate libraries on link lines based on
+  linker capabilities.  Run "cmake --help-policy CMP0156" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Since the policy is not set, legacy libraries de-duplication strategy will
+  be applied.
+Call Stack (most recent call first):
+  ggml/src/ggml-cpu/CMakeLists.txt:22 (ggml_add_backend_library)
+  ggml/src/CMakeLists.txt:444 (ggml_add_cpu_backend_variant_impl)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/CMakeLists.txt
+CMake Warning (dev) at ggml/src/CMakeLists.txt:224 (add_library):
+  Policy CMP0156 is not set: De-duplicate libraries on link lines based on
+  linker capabilities.  Run "cmake --help-policy CMP0156" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Since the policy is not set, legacy libraries de-duplication strategy will
+  be applied.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/CMakeLists.txt
+CMake Warning (dev) at ggml/src/CMakeLists.txt:224 (add_library):
+  Policy CMP0156 is not set: De-duplicate libraries on link lines based on
+  linker capabilities.  Run "cmake --help-policy CMP0156" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Since the policy is not set, legacy libraries de-duplication strategy will
+  be applied.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/CMakeLists.txt
+CMake Warning (dev) at ggml/src/CMakeLists.txt:224 (add_library):
+  Policy CMP0156 is not set: De-duplicate libraries on link lines based on
+  linker capabilities.  Run "cmake --help-policy CMP0156" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Since the policy is not set, legacy libraries de-duplication strategy will
+  be applied.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/CMakeLists.txt
+CMake Warning (dev) at ggml/src/CMakeLists.txt:224 (add_library):
+  Policy CMP0156 is not set: De-duplicate libraries on link lines based on
+  linker capabilities.  Run "cmake --help-policy CMP0156" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Since the policy is not set, legacy libraries de-duplication strategy will
+  be applied.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/CMakeLists.txt
+CMake Warning (dev) in src/CMakeLists.txt:
+  Policy CMP0128 is not set: Selection of language standard and extension
+  flags improved.  Run "cmake --help-policy CMP0128" for policy details.  Use
+  the cmake_policy command to set the policy and suppress this warning.
+
+  For compatibility with older versions of CMake, compiler extensions won't
+  be enabled.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/src/CMakeLists.txt
+CMake Warning (dev) in src/CMakeLists.txt:
+  Policy CMP0128 is not set: Selection of language standard and extension
+  flags improved.  Run "cmake --help-policy CMP0128" for policy details.  Use
+  the cmake_policy command to set the policy and suppress this warning.
+
+  For compatibility with older versions of CMake, compiler extensions won't
+  be enabled.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/src/CMakeLists.txt
+CMake Warning (dev) in src/CMakeLists.txt:
+  Policy CMP0128 is not set: Selection of language standard and extension
+  flags improved.  Run "cmake --help-policy CMP0128" for policy details.  Use
+  the cmake_policy command to set the policy and suppress this warning.
+
+  For compatibility with older versions of CMake, compiler extensions won't
+  be enabled.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/src/CMakeLists.txt
+CMake Warning (dev) in src/CMakeLists.txt:
+  Policy CMP0128 is not set: Selection of language standard and extension
+  flags improved.  Run "cmake --help-policy CMP0128" for policy details.  Use
+  the cmake_policy command to set the policy and suppress this warning.
+
+  For compatibility with older versions of CMake, compiler extensions won't
+  be enabled.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/src/CMakeLists.txt
+CMake Warning (dev) at src/CMakeLists.txt:106 (add_library):
+  Policy CMP0156 is not set: De-duplicate libraries on link lines based on
+  linker capabilities.  Run "cmake --help-policy CMP0156" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Since the policy is not set, legacy libraries de-duplication strategy will
+  be applied.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/src/CMakeLists.txt
+CMake Warning (dev) at src/CMakeLists.txt:106 (add_library):
+  Policy CMP0156 is not set: De-duplicate libraries on link lines based on
+  linker capabilities.  Run "cmake --help-policy CMP0156" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Since the policy is not set, legacy libraries de-duplication strategy will
+  be applied.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/src/CMakeLists.txt
+CMake Warning (dev) at src/CMakeLists.txt:106 (add_library):
+  Policy CMP0156 is not set: De-duplicate libraries on link lines based on
+  linker capabilities.  Run "cmake --help-policy CMP0156" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Since the policy is not set, legacy libraries de-duplication strategy will
+  be applied.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/src/CMakeLists.txt
+CMake Warning (dev) at src/CMakeLists.txt:106 (add_library):
+  Policy CMP0156 is not set: De-duplicate libraries on link lines based on
+  linker capabilities.  Run "cmake --help-policy CMP0156" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Since the policy is not set, legacy libraries de-duplication strategy will
+  be applied.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+   Called from: [1]	C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/src/CMakeLists.txt
+running: "\\\\?\\C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" "--build" "C:\\Users\\SamuelCavazos\\Documents\\whisper\\Whisper\\Whisper\\rust-worker\\target\\release\\build\\whisper-rs-sys-ba4171270eb25531\\out\\build" "--target" "install" "--config" "Release" "--parallel" "16"

@@ -8,6 +8,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Threading.Tasks;
 using IOPath = System.IO.Path;
@@ -17,7 +18,7 @@ namespace Whisper
     public sealed partial class MainWindow : Window
     {
         private const double WideLayoutBreakpoint = 980;
-        private const string DefaultWhisperModel = "openai/whisper-large-v3-turbo";
+        private const string DefaultWhisperModel = "openai/whisper-medium";
         private readonly Windows.UI.Color[] _teamAccentColors =
         {
             ColorHelper.FromArgb(0xFF, 0x5D, 0xA8, 0xFF),
@@ -34,12 +35,18 @@ namespace Whisper
         private bool _isInSettingsMode;
         private bool _isSidebarCollapsedByUser;
         private bool _isCaptureToggleBusy;
+        private string? _lastCaptureStatus;
+        private readonly object _hostLogLock = new();
+        private readonly string _hostLogFilePath;
+        private string? _workerLogFilePath;
         private Button? _selectedTeamButton;
         private Process? _liveTranscriberProcess;
 
         public MainWindow()
         {
             InitializeComponent();
+            _hostLogFilePath = BuildSessionLogFilePath("host");
+            LogHost($"MainWindow initialized. Host log path: {_hostLogFilePath}");
 
             ExtendsContentIntoTitleBar = true;
             SetTitleBar(TitleBarDragRegion);
@@ -387,32 +394,86 @@ namespace Whisper
 
         private async Task StartLiveTranscriptionAsync()
         {
-            string scriptPath = ResolveTranscriberScriptPath();
-            if (!File.Exists(scriptPath))
-            {
-                SetCaptureStatus("Transcriber script not found. Build once or check scripts/live_meeting_transcriber.py.");
-                return;
-            }
+            _workerLogFilePath = BuildSessionLogFilePath("worker");
+            string? rustWorkerPath = ResolveRustWorkerPath();
+            string ggmlModelPath = ResolveGgmlModelPath();
+            bool canUseRust = rustWorkerPath is not null && File.Exists(ggmlModelPath);
+            bool disableMic = ResolveBooleanEnvironmentVariable("WHISPER_DISABLE_MIC");
+            bool disableLoopback = ResolveBooleanEnvironmentVariable("WHISPER_DISABLE_LOOPBACK");
+            string sourceArgs = $"{(disableMic ? " --disable-mic" : string.Empty)}{(disableLoopback ? " --disable-loopback" : string.Empty)}";
 
-            string pythonExecutable = Environment.GetEnvironmentVariable("WHISPER_PYTHON") ?? "python";
-            Process process = new()
+            ProcessStartInfo startInfo;
+            string backendName;
+
+            if (canUseRust)
             {
-                StartInfo = new ProcessStartInfo
+                string selectedRustWorkerPath = rustWorkerPath!;
+                backendName = "rust";
+                startInfo = new ProcessStartInfo
+                {
+                    FileName = selectedRustWorkerPath,
+                    Arguments = $"--model-path \"{ggmlModelPath}\" --device cuda --chunk-seconds 6 --log-file \"{_workerLogFilePath}\" --verbose-chunk-log{sourceArgs}",
+                    WorkingDirectory = IOPath.GetDirectoryName(selectedRustWorkerPath) ?? AppContext.BaseDirectory,
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                };
+
+                LogHost($"Start requested. Using rust worker: {selectedRustWorkerPath}. GGML model path: {ggmlModelPath}");
+            }
+            else
+            {
+                string scriptPath = ResolveTranscriberScriptPath();
+                if (rustWorkerPath is null)
+                {
+                    LogHost($"Start requested. Rust worker not found; falling back to python script: {scriptPath}");
+                }
+                else
+                {
+                    LogHost(
+                        $"Start requested. Rust worker found at {rustWorkerPath}, but GGML model file was not found at {ggmlModelPath}. Falling back to python script: {scriptPath}");
+                }
+
+                if (!File.Exists(scriptPath))
+                {
+                    SetCaptureStatus("No transcriber backend found. Build rust worker or verify scripts/live_meeting_transcriber.py.");
+                    LogHost("Start aborted. Python transcriber script file not found.");
+                    return;
+                }
+
+                string pythonExecutable = Environment.GetEnvironmentVariable("WHISPER_PYTHON") ?? "python";
+                string whisperModel = ResolveWhisperModel();
+
+                backendName = "python";
+                startInfo = new ProcessStartInfo
                 {
                     FileName = pythonExecutable,
-                    Arguments = $"-u \"{scriptPath}\" --model {DefaultWhisperModel} --device cuda --chunk-seconds 6",
+                    Arguments = $"-u \"{scriptPath}\" --model {whisperModel} --device cuda --chunk-seconds 6 --log-file \"{_workerLogFilePath}\" --verbose-chunk-log{sourceArgs}",
                     WorkingDirectory = IOPath.GetDirectoryName(scriptPath) ?? AppContext.BaseDirectory,
                     CreateNoWindow = true,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
-                },
+                };
+
+                startInfo.Environment["PYTHONUNBUFFERED"] = "1";
+                startInfo.Environment["HF_HUB_DISABLE_PROGRESS_BARS"] = "1";
+                LogHost($"Python fallback selected. Python: {pythonExecutable}. Model: {whisperModel}. Worker log: {_workerLogFilePath}");
+            }
+
+            LogHost($"Capture source configuration. disableMic={disableMic}, disableLoopback={disableLoopback}");
+
+            Process process = new()
+            {
+                StartInfo = startInfo,
                 EnableRaisingEvents = true,
             };
 
             process.OutputDataReceived += OnLiveTranscriberOutputDataReceived;
             process.ErrorDataReceived += OnLiveTranscriberErrorDataReceived;
             process.Exited += OnLiveTranscriberExited;
+            LogHost($"Launching transcriber backend={backendName}. Executable: {process.StartInfo.FileName}. Worker log: {_workerLogFilePath}");
 
             try
             {
@@ -420,12 +481,14 @@ namespace Whisper
                 if (!started)
                 {
                     SetCaptureStatus("Unable to start transcription process.");
+                    LogHost("Start failed. process.Start returned false.");
                     return;
                 }
             }
             catch (Exception ex)
             {
                 SetCaptureStatus($"Failed to start transcriber: {ex.Message}");
+                LogHost($"Start failed with exception: {ex}");
                 return;
             }
 
@@ -434,6 +497,7 @@ namespace Whisper
             process.BeginErrorReadLine();
             UpdateCaptureUi(isCapturing: true);
             SetCaptureStatus("Starting live transcript...");
+            LogHost($"Transcriber started. PID: {process.Id}");
 
             await Task.CompletedTask;
         }
@@ -444,12 +508,14 @@ namespace Whisper
             if (process is null)
             {
                 UpdateCaptureUi(isCapturing: false);
+                LogHost("Stop requested with no active transcriber process.");
                 return;
             }
 
             _liveTranscriberProcess = null;
             UpdateCaptureUi(isCapturing: false);
             SetCaptureStatus("Stopping live transcript...");
+            LogHost($"Stop requested. PID: {process.Id}");
 
             try
             {
@@ -457,11 +523,13 @@ namespace Whisper
                 {
                     process.Kill(entireProcessTree: true);
                     await process.WaitForExitAsync();
+                    LogHost($"Transcriber process killed and awaited. PID: {process.Id}");
                 }
             }
             catch (Exception ex)
             {
                 SetCaptureStatus($"Stop failed: {ex.Message}");
+                LogHost($"Stop failed with exception: {ex}");
             }
             finally
             {
@@ -469,9 +537,11 @@ namespace Whisper
                 process.ErrorDataReceived -= OnLiveTranscriberErrorDataReceived;
                 process.Exited -= OnLiveTranscriberExited;
                 process.Dispose();
+                LogHost("Transcriber process resources disposed.");
             }
 
             SetCaptureStatus("Live transcript stopped.");
+            LogHost("Stop completed.");
         }
 
         private void OnLiveTranscriberOutputDataReceived(object sender, DataReceivedEventArgs e)
@@ -481,7 +551,9 @@ namespace Whisper
                 return;
             }
 
-            HandleTranscriberMessage(e.Data);
+            string line = e.Data.Trim();
+            LogHost($"Worker stdout: {line}");
+            HandleTranscriberMessage(line);
         }
 
         private void OnLiveTranscriberErrorDataReceived(object sender, DataReceivedEventArgs e)
@@ -491,7 +563,14 @@ namespace Whisper
                 return;
             }
 
-            SetCaptureStatus(e.Data);
+            string line = e.Data.Trim();
+            LogHost($"Worker stderr: {line}");
+            if (line.Contains("error", StringComparison.OrdinalIgnoreCase)
+                || line.Contains("exception", StringComparison.OrdinalIgnoreCase)
+                || line.Contains("traceback", StringComparison.OrdinalIgnoreCase))
+            {
+                SetCaptureStatus(line);
+            }
         }
 
         private void OnLiveTranscriberExited(object? sender, EventArgs e)
@@ -503,6 +582,7 @@ namespace Whisper
 
             if (!ReferenceEquals(_liveTranscriberProcess, process))
             {
+                LogHost($"Received exit event from stale process. PID: {process.Id}");
                 return;
             }
 
@@ -517,12 +597,14 @@ namespace Whisper
             catch
             {
                 SetCaptureStatus("Live transcript process exited.");
+                LogHost($"Transcriber process exit observed without exit code. PID: {process.Id}");
                 return;
             }
 
             SetCaptureStatus(exitCode == 0
                 ? "Live transcript stopped."
                 : $"Live transcript exited with code {exitCode}.");
+            LogHost($"Transcriber exited. PID: {process.Id}, ExitCode: {exitCode}");
         }
 
         private void HandleTranscriberMessage(string line)
@@ -543,21 +625,27 @@ namespace Whisper
                     case "status":
                         if (root.TryGetProperty("message", out JsonElement statusMessageElement))
                         {
-                            SetCaptureStatus(statusMessageElement.GetString() ?? "Status update");
+                            string status = statusMessageElement.GetString() ?? "Status update";
+                            SetCaptureStatus(status);
+                            LogHost($"Worker status: {status}");
                         }
 
                         break;
                     case "transcript":
                         if (root.TryGetProperty("text", out JsonElement textElement))
                         {
-                            AppendTranscriptText(textElement.GetString() ?? string.Empty);
+                            string transcript = textElement.GetString() ?? string.Empty;
+                            LogHost($"Worker transcript text length: {transcript.Length}");
+                            AppendTranscriptText(transcript);
                         }
 
                         break;
                     case "error":
                         if (root.TryGetProperty("message", out JsonElement errorMessageElement))
                         {
-                            SetCaptureStatus(errorMessageElement.GetString() ?? "Unknown transcriber error.");
+                            string error = errorMessageElement.GetString() ?? "Unknown transcriber error.";
+                            SetCaptureStatus(error);
+                            LogHost($"Worker error event: {error}");
                         }
 
                         break;
@@ -565,7 +653,13 @@ namespace Whisper
             }
             catch (JsonException)
             {
-                SetCaptureStatus(line);
+                LogHost($"Worker stdout non-JSON line: {line}");
+                if (line.Contains("error", StringComparison.OrdinalIgnoreCase)
+                    || line.Contains("exception", StringComparison.OrdinalIgnoreCase)
+                    || line.Contains("traceback", StringComparison.OrdinalIgnoreCase))
+                {
+                    SetCaptureStatus(line);
+                }
             }
         }
 
@@ -585,14 +679,31 @@ namespace Whisper
                 }
 
                 NoteBodyTextBox.Text += normalized + Environment.NewLine;
-                NoteBodyTextBox.SelectionStart = NoteBodyTextBox.Text.Length;
-                NoteBodyTextBox.SelectionLength = 0;
             });
+            LogHost($"Transcript appended. Characters: {normalized.Length}");
         }
 
         private void SetCaptureStatus(string status)
         {
-            RunOnUiThread(() => CaptureStatusText.Text = status);
+            string normalized = status.Trim();
+            if (normalized.Length == 0)
+            {
+                return;
+            }
+
+            if (normalized.Length > 220)
+            {
+                normalized = normalized[..220];
+            }
+
+            if (string.Equals(_lastCaptureStatus, normalized, StringComparison.Ordinal))
+            {
+                return;
+            }
+
+            _lastCaptureStatus = normalized;
+            RunOnUiThread(() => CaptureStatusText.Text = normalized);
+            LogHost($"Capture status changed: {normalized}");
         }
 
         private void UpdateCaptureUi(bool isCapturing)
@@ -608,14 +719,30 @@ namespace Whisper
 
         private void RunOnUiThread(Action callback)
         {
-            if (DispatcherQueue.HasThreadAccess)
+            _ = DispatcherQueue.TryEnqueue(() =>
             {
-                callback();
-            }
-            else
+                try
+                {
+                    callback();
+                }
+                catch (Exception ex) when (IsBenignUiInteropException(ex))
+                {
+                    Debug.WriteLine($"Ignored benign UI interop exception: 0x{ex.HResult:X8}");
+                    LogHost($"Ignored benign UI interop exception: 0x{ex.HResult:X8}");
+                }
+            });
+        }
+
+        private static bool IsBenignUiInteropException(Exception ex)
+        {
+            if (ex is not COMException comException)
             {
-                _ = DispatcherQueue.TryEnqueue(() => callback());
+                return false;
             }
+
+            return comException.HResult == unchecked((int)0x8001010D) // RPC_E_CANTCALLOUT_ININPUTSYNCCALL
+                || comException.HResult == unchecked((int)0x80070057)  // E_INVALIDARG
+                || comException.HResult == unchecked((int)0x80004005); // E_FAIL
         }
 
         private static string ResolveTranscriberScriptPath()
@@ -627,6 +754,132 @@ namespace Whisper
             }
 
             return IOPath.GetFullPath(IOPath.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "scripts", "live_meeting_transcriber.py"));
+        }
+
+        private static string ResolveWhisperModel()
+        {
+            string? overrideModel = Environment.GetEnvironmentVariable("WHISPER_MODEL");
+            if (!string.IsNullOrWhiteSpace(overrideModel))
+            {
+                return overrideModel.Trim();
+            }
+
+            return DefaultWhisperModel;
+        }
+
+        private static bool ResolveBooleanEnvironmentVariable(string variableName)
+        {
+            string? value = Environment.GetEnvironmentVariable(variableName);
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return false;
+            }
+
+            return value.Trim().ToLowerInvariant() switch
+            {
+                "1" => true,
+                "true" => true,
+                "yes" => true,
+                "on" => true,
+                _ => false,
+            };
+        }
+
+        private static string ResolveGgmlModelPath()
+        {
+            string? overridePath = Environment.GetEnvironmentVariable("WHISPER_GGML_MODEL_PATH");
+            if (!string.IsNullOrWhiteSpace(overridePath))
+            {
+                return overridePath.Trim();
+            }
+
+            string bundledPath = IOPath.Combine(AppContext.BaseDirectory, "models", "ggml-medium.bin");
+            if (File.Exists(bundledPath))
+            {
+                return bundledPath;
+            }
+
+            return IOPath.GetFullPath(IOPath.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "models", "ggml-medium.bin"));
+        }
+
+        private static string? ResolveRustWorkerPath()
+        {
+            string? overridePath = Environment.GetEnvironmentVariable("WHISPER_RUST_WORKER");
+            if (!string.IsNullOrWhiteSpace(overridePath) && File.Exists(overridePath))
+            {
+                return overridePath.Trim();
+            }
+
+            string bundledPath = IOPath.Combine(AppContext.BaseDirectory, "rust_worker", "live_meeting_transcriber_rust.exe");
+            if (File.Exists(bundledPath))
+            {
+                return bundledPath;
+            }
+
+            string releasePath = IOPath.GetFullPath(IOPath.Combine(
+                AppContext.BaseDirectory,
+                "..",
+                "..",
+                "..",
+                "..",
+                "..",
+                "rust-worker",
+                "target",
+                "release",
+                "live_meeting_transcriber_rust.exe"));
+            if (File.Exists(releasePath))
+            {
+                return releasePath;
+            }
+
+            string debugPath = IOPath.GetFullPath(IOPath.Combine(
+                AppContext.BaseDirectory,
+                "..",
+                "..",
+                "..",
+                "..",
+                "..",
+                "rust-worker",
+                "target",
+                "debug",
+                "live_meeting_transcriber_rust.exe"));
+            if (File.Exists(debugPath))
+            {
+                return debugPath;
+            }
+
+            return null;
+        }
+
+        private static string BuildSessionLogFilePath(string prefix)
+        {
+            string directory = IOPath.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Whisper",
+                "logs");
+            Directory.CreateDirectory(directory);
+
+            string timestamp = DateTimeOffset.Now.ToString("yyyyMMdd-HHmmss");
+            string fileName = $"{prefix}-{timestamp}-{Environment.ProcessId}.log";
+            return IOPath.Combine(directory, fileName);
+        }
+
+        private void LogHost(string message)
+        {
+            string line = $"{DateTimeOffset.Now:yyyy-MM-dd HH:mm:ss.fff} [host] [tid:{Environment.CurrentManagedThreadId}] {message}";
+            Debug.WriteLine(line);
+
+            try
+            {
+                lock (_hostLogLock)
+                {
+                    File.AppendAllText(_hostLogFilePath, line + Environment.NewLine);
+                }
+            }
+            catch
+            {
+                // Logging must never crash transcription flow.
+            }
         }
     }
 }

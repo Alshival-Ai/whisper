@@ -1,0 +1,12 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake
+C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CheckCSourceRuns.cmake
+C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CheckCXXCompilerFlag.cmake
+C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CheckCXXSourceCompiles.cmake
+C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/Internal/CheckCompilerFlag.cmake
+C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/Internal/CheckFlagCommonConfig.cmake
+C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/Internal/CheckSourceCompiles.cmake
+C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/Internal/CheckSourceRuns.cmake
+C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/cmake/common.cmake
+C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/CMakeLists.txt
+C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp/ggml/src/ggml-cpu/cmake/FindSIMD.cmake

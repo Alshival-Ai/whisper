@@ -1,0 +1,10 @@
+^C:\USERS\SAMUELCAVAZOS\DOCUMENTS\WHISPER\WHISPER\WHISPER\RUST-WORKER\TARGET\RELEASE\BUILD\WHISPER-RS-SYS-BA4171270EB25531\OUT\BUILD\CMAKEFILES\9C0E41D3690F3C32F22DE654D3E69577\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/whisper.cpp -BC:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/build/whisper.cpp.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

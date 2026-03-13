@@ -1,0 +1,12 @@
+C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/build/CMakeFiles/INSTALL.dir
+C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/build/ggml/CMakeFiles/INSTALL.dir
+C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/build/ggml/CMakeFiles/ALL_BUILD.dir
+C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/build/ggml/src/CMakeFiles/ggml-base.dir
+C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/build/ggml/src/CMakeFiles/ggml.dir
+C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/build/ggml/src/CMakeFiles/ggml-cpu.dir
+C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/build/ggml/src/CMakeFiles/INSTALL.dir
+C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/build/ggml/src/ggml-cpu/CMakeFiles/INSTALL.dir
+C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/build/src/CMakeFiles/whisper.dir
+C:/Users/SamuelCavazos/Documents/whisper/Whisper/Whisper/rust-worker/target/release/build/whisper-rs-sys-ba4171270eb25531/out/build/src/CMakeFiles/INSTALL.dir

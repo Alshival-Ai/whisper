@@ -1,0 +1,10 @@
+C:\Users\SamuelCavazos\Documents\whisper\Whisper\Whisper\rust-worker\target\release\deps\fs_extra-b50db8f8d3245bb3.d: C:\Users\SamuelCavazos\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\fs_extra-1.3.0\src\lib.rs C:\Users\SamuelCavazos\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\fs_extra-1.3.0\src\error.rs C:\Users\SamuelCavazos\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\fs_extra-1.3.0\src\file.rs C:\Users\SamuelCavazos\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\fs_extra-1.3.0\src\dir.rs
+
+C:\Users\SamuelCavazos\Documents\whisper\Whisper\Whisper\rust-worker\target\release\deps\libfs_extra-b50db8f8d3245bb3.rlib: C:\Users\SamuelCavazos\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\fs_extra-1.3.0\src\lib.rs C:\Users\SamuelCavazos\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\fs_extra-1.3.0\src\error.rs C:\Users\SamuelCavazos\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\fs_extra-1.3.0\src\file.rs C:\Users\SamuelCavazos\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\fs_extra-1.3.0\src\dir.rs
+
+C:\Users\SamuelCavazos\Documents\whisper\Whisper\Whisper\rust-worker\target\release\deps\libfs_extra-b50db8f8d3245bb3.rmeta: C:\Users\SamuelCavazos\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\fs_extra-1.3.0\src\lib.rs C:\Users\SamuelCavazos\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\fs_extra-1.3.0\src\error.rs C:\Users\SamuelCavazos\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\fs_extra-1.3.0\src\file.rs C:\Users\SamuelCavazos\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\fs_extra-1.3.0\src\dir.rs
+
+C:\Users\SamuelCavazos\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\fs_extra-1.3.0\src\lib.rs:
+C:\Users\SamuelCavazos\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\fs_extra-1.3.0\src\error.rs:
+C:\Users\SamuelCavazos\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\fs_extra-1.3.0\src\file.rs:
+C:\Users\SamuelCavazos\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\fs_extra-1.3.0\src\dir.rs:

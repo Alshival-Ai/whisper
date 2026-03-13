@@ -24,6 +24,11 @@
   <ItemGroup>
     <None Include="scripts\live_meeting_transcriber.py" CopyToOutputDirectory="PreserveNewest" />
     <None Include="scripts\requirements-live-transcriber.txt" CopyToOutputDirectory="PreserveNewest" />
+    <None
+      Include="rust-worker\target\release\live_meeting_transcriber_rust.exe"
+      Condition="Exists('rust-worker\target\release\live_meeting_transcriber_rust.exe')"
+      Link="rust_worker\live_meeting_transcriber_rust.exe"
+      CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
     <!-- Publish Properties -->
