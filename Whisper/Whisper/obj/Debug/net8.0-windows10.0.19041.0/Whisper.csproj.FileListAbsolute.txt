@@ -88,3 +88,5 @@ C:\Users\SamuelCavazos\Documents\whisper\Whisper\Whisper\obj\Debug\net8.0-window
 C:\Users\SamuelCavazos\Documents\whisper\Whisper\Whisper\obj\Debug\net8.0-windows10.0.19041.0\qualifiers.txt
 C:\Users\SamuelCavazos\Documents\whisper\Whisper\Whisper\obj\Debug\net8.0-windows10.0.19041.0\qualifiers.txt.intermediate
 C:\Users\SamuelCavazos\Documents\whisper\Whisper\Whisper\obj\Debug\net8.0-windows10.0.19041.0\MultipleQualifiersPerDimensionFound.txt
+C:\Users\SamuelCavazos\Documents\whisper\Whisper\Whisper\bin\Debug\net8.0-windows10.0.19041.0\scripts\live_meeting_transcriber.py
+C:\Users\SamuelCavazos\Documents\whisper\Whisper\Whisper\bin\Debug\net8.0-windows10.0.19041.0\scripts\requirements-live-transcriber.txt

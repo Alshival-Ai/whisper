@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using IOPath = System.IO.Path;
 
 namespace Whisper
 {
@@ -399,8 +400,8 @@ namespace Whisper
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = pythonExecutable,
-                    Arguments = $"\"{scriptPath}\" --model {DefaultWhisperModel} --device cuda --chunk-seconds 6",
-                    WorkingDirectory = Path.GetDirectoryName(scriptPath) ?? AppContext.BaseDirectory,
+                    Arguments = $"-u \"{scriptPath}\" --model {DefaultWhisperModel} --device cuda --chunk-seconds 6",
+                    WorkingDirectory = IOPath.GetDirectoryName(scriptPath) ?? AppContext.BaseDirectory,
                     CreateNoWindow = true,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
@@ -500,7 +501,7 @@ namespace Whisper
                 return;
             }
 
-            if (_liveTranscriberProcess is not process)
+            if (!ReferenceEquals(_liveTranscriberProcess, process))
             {
                 return;
             }
@@ -619,13 +620,13 @@ namespace Whisper
 
         private static string ResolveTranscriberScriptPath()
         {
-            string bundledPath = Path.Combine(AppContext.BaseDirectory, "scripts", "live_meeting_transcriber.py");
+            string bundledPath = IOPath.Combine(AppContext.BaseDirectory, "scripts", "live_meeting_transcriber.py");
             if (File.Exists(bundledPath))
             {
                 return bundledPath;
             }
 
-            return Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "scripts", "live_meeting_transcriber.py"));
+            return IOPath.GetFullPath(IOPath.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "scripts", "live_meeting_transcriber.py"));
         }
     }
 }

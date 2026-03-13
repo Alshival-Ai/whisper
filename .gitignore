@@ -1,2 +1,44 @@
+# Visual Studio / IDE
+.vs/
 .vsidx
-Whisper/.vs
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+*.log
+*.err.txt
+*.cache
+*.assets.cache
+
+# WinUI / MSIX packaging outputs
+AppPackages/
+BundleArtifacts/
+*.appx
+*.appxbundle
+*.appxupload
+*.msix
+*.msixbundle
+*.msixupload
+*.build.appxrecipe
+*.pri.xml
+
+# NuGet artifacts
+packages/
+*.nupkg
+
+# Temp / backups
+*.tmp
+*.temp
+*.backup
+
+# Python script artifacts
+__pycache__/
+*.py[cod]
+.venv/
+venv/

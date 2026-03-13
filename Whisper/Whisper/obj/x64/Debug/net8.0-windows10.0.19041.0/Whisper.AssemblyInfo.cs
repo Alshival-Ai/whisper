@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Whisper")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f28ce58329561f6e5684cd3ab663b363efccdf67")]
 [assembly: System.Reflection.AssemblyProductAttribute("Whisper")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Whisper")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
