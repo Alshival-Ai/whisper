@@ -1,0 +1,1 @@
+Always update the project wiki `whisper.wiki/` with technical/user documentation and check for stale documentation.![alt text](image.png)

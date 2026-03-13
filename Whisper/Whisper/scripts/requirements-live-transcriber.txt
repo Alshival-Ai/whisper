@@ -1,0 +1,4 @@
+﻿numpy>=1.26.0
+soundcard>=0.4.3
+torch>=2.3.0
+transformers>=4.39.0

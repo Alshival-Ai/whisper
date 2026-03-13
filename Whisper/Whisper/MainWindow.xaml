@@ -1,0 +1,986 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="Whisper.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Whisper">
+
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
+
+    <Grid x:Name="RootGrid" Background="#FF1F2023">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="SidebarColumn" Width="210" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border
+            x:Name="SidebarRoot"
+            Grid.Column="0"
+            Background="#CC1A1B1D"
+            BorderBrush="#FF2E3136"
+            BorderThickness="0,0,1,0"
+            Padding="8,10,8,10"
+            Visibility="Visible">
+            <Grid RowSpacing="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Button
+                    x:Name="SidebarCollapseButton"
+                    Grid.Row="0"
+                    Width="20"
+                    Height="20"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="#FF4B4D52"
+                    BorderThickness="1"
+                    CornerRadius="6">
+                    <SymbolIcon Symbol="Back" Foreground="#FFC8CBCE" />
+                </Button>
+
+                <Border
+                    Grid.Row="1"
+                    Height="24"
+                    CornerRadius="12"
+                    BorderBrush="#FF3C3F44"
+                    BorderThickness="1"
+                    Background="#66262A2F"
+                    Padding="8,0">
+                    <Grid ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <FontIcon Glyph="&#xE721;" Foreground="#FF979DA6" FontSize="10" VerticalAlignment="Center" />
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="Search"
+                            Foreground="#FF8A919A"
+                            FontSize="11"
+                            VerticalAlignment="Center" />
+                        <TextBlock
+                            Grid.Column="2"
+                            Text="Ctrl+K"
+                            Foreground="#FF7B818A"
+                            FontSize="10"
+                            VerticalAlignment="Center" />
+                    </Grid>
+                </Border>
+
+                <StackPanel Grid.Row="2" Margin="0,8,0,0" Spacing="4">
+                    <Button
+                        x:Name="HomeNavButton"
+                        Height="26"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Stretch"
+                        Padding="8,0"
+                        Background="#FF2B2E33"
+                        BorderThickness="0"
+                        CornerRadius="7">
+                        <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                            <FontIcon Glyph="&#xE80F;" Foreground="#FFC5CBD2" FontSize="11" />
+                            <TextBlock Text="Home" Foreground="#FFC5CBD2" FontSize="12" />
+                        </StackPanel>
+                    </Button>
+                    <StackPanel Margin="8,0,0,0" Orientation="Horizontal" Spacing="6">
+                        <FontIcon Glyph="&#xE716;" Foreground="#FF90959E" FontSize="11" />
+                        <TextBlock Text="Shared with me" Foreground="#FFA1A8B1" FontSize="12" />
+                    </StackPanel>
+                    <StackPanel Margin="8,0,0,0" Orientation="Horizontal" Spacing="6">
+                        <FontIcon Glyph="&#xE8BD;" Foreground="#FF90959E" FontSize="11" />
+                        <TextBlock Text="Chat" Foreground="#FFA1A8B1" FontSize="12" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Margin="0,10,0,0" Spacing="8">
+                    <TextBlock Text="Spaces" Foreground="#FF6F747B" FontSize="11" />
+                    <StackPanel Margin="8,0,0,0" Spacing="6">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <FontIcon Glyph="&#xED43;" Foreground="#FF90959E" FontSize="10" />
+                            <TextBlock Text="My notes" Foreground="#FFC1C7CF" FontSize="12" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <FontIcon Glyph="&#xE838;" Foreground="#FF90959E" FontSize="10" />
+                            <TextBlock Text="Add folder" Foreground="#FFA5ABB3" FontSize="12" />
+                        </StackPanel>
+                        <Grid ColumnSpacing="6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <FontIcon Glyph="&#xE8FA;" Foreground="#FF90959E" FontSize="10" />
+                                <TextBlock Text="Teams" Foreground="#FFA5ABB3" FontSize="12" />
+                            </StackPanel>
+                            <Button
+                                x:Name="AddTeamButton"
+                                Grid.Column="1"
+                                Width="18"
+                                Height="18"
+                                Padding="0"
+                                Background="Transparent"
+                                BorderBrush="#663C3F44"
+                                BorderThickness="1"
+                                CornerRadius="9">
+                                <FontIcon Glyph="&#xE710;" FontSize="9" Foreground="#FFB9BEC5" />
+                            </Button>
+                        </Grid>
+
+                        <StackPanel x:Name="TeamListPanel" Spacing="4">
+                            <Button
+                                x:Name="BrowardHealthTeamButton"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                Padding="6,2"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                CornerRadius="6"
+                                Tag="Broward Health">
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <Ellipse Width="5" Height="5" Fill="#FF5DA8FF" VerticalAlignment="Center" />
+                                    <TextBlock Text="Broward Health" Foreground="#FF8FA6BD" FontSize="12" />
+                                </StackPanel>
+                            </Button>
+                            <Button
+                                x:Name="CustomerCallsTeamButton"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                Padding="6,2"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                CornerRadius="6"
+                                Tag="Customer calls">
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <Ellipse Width="5" Height="5" Fill="#FF7AB6F5" VerticalAlignment="Center" />
+                                    <TextBlock Text="Customer calls" Foreground="#FF89909A" FontSize="12" />
+                                </StackPanel>
+                            </Button>
+                            <Button
+                                x:Name="TeamMeetingsTeamButton"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                Padding="6,2"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                CornerRadius="6"
+                                Tag="Team meetings">
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <Ellipse Width="5" Height="5" Fill="#FF7ACB78" VerticalAlignment="Center" />
+                                    <TextBlock Text="Team meetings" Foreground="#FF89909A" FontSize="12" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+
+                <Border
+                    Grid.Row="5"
+                    Margin="0,0,0,4"
+                    Padding="0,8,0,0"
+                    BorderBrush="#2AFFFFFF"
+                    BorderThickness="0,1,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <FontIcon Glyph="&#xE72E;" Foreground="#FF8C929A" FontSize="10" VerticalAlignment="Center" />
+                            <FontIcon Glyph="&#xE77B;" Foreground="#FF8C929A" FontSize="10" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <Border
+                            Grid.Column="1"
+                            Margin="8,0,0,0"
+                            Padding="6,3"
+                            CornerRadius="8"
+                            Background="#FF2E3136"
+                            HorizontalAlignment="Left">
+                            <TextBlock Text="Whisper" Foreground="#FFD0D5DB" FontSize="10" />
+                        </Border>
+                        <Button
+                            x:Name="SidebarAccountMenuButton"
+                            Grid.Column="2"
+                            Width="20"
+                            Height="20"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            CornerRadius="10">
+                            <Button.Flyout>
+                                <MenuFlyout Placement="TopEdgeAlignedRight">
+                                    <MenuFlyoutItem x:Name="HelpCenterMenuItem" Text="Help Center" Icon="Help" />
+                                    <MenuFlyoutItem x:Name="SettingsMenuItem" Text="Settings" Icon="Setting" />
+                                </MenuFlyout>
+                            </Button.Flyout>
+                            <FontIcon Glyph="&#xE700;" Foreground="#FF8C929A" FontSize="10" VerticalAlignment="Center" />
+                        </Button>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="TitleBarDragRegion" Grid.Row="0" Margin="8,0,8,0">
+                <TextBlock
+                    x:Name="SettingsTopTitle"
+                    Text="Settings"
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Foreground="#FFD4D8DD"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Visibility="Collapsed" />
+
+                <StackPanel
+                    x:Name="NotesTitleActions"
+                    Orientation="Horizontal"
+                    Spacing="6"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Visibility="Collapsed">
+                    <Button
+                        x:Name="NotesBackButton"
+                        Width="26"
+                        Height="22"
+                        Padding="0"
+                        Background="#332F343A"
+                        BorderBrush="#553E444C"
+                        BorderThickness="1"
+                        CornerRadius="11">
+                        <FontIcon Glyph="&#xE72B;" FontSize="10" Foreground="#FFD0D5DB" />
+                    </Button>
+                    <Button
+                        Width="26"
+                        Height="22"
+                        Padding="0"
+                        Background="#332F343A"
+                        BorderBrush="#553E444C"
+                        BorderThickness="1"
+                        CornerRadius="11">
+                        <FontIcon Glyph="&#xE117;" FontSize="10" Foreground="#FFBFC5CD" />
+                    </Button>
+                </StackPanel>
+
+                <Button
+                    x:Name="MobileMenuButton"
+                    Width="20"
+                    Height="20"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="#FF4B4D52"
+                    BorderThickness="1"
+                    CornerRadius="6"
+                    Visibility="Collapsed">
+                    <FontIcon Glyph="&#xE700;" FontSize="10" Foreground="#FFC8CBCE" />
+                </Button>
+
+                <Button
+                    x:Name="QuickNoteButton"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Height="28"
+                    Padding="12,0"
+                    CornerRadius="14"
+                    Background="#FF2F3236"
+                    BorderBrush="#663C4148"
+                    BorderThickness="1"
+                    Foreground="#FFE5E8EB"
+                    Margin="0,0,164,0">
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <FontIcon Glyph="&#xE70B;" FontSize="10" />
+                        <TextBlock Text="Quick note" FontSize="14" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+
+            <Grid x:Name="MainPane" Grid.Row="1" Margin="44,8,44,16">
+                <Grid x:Name="HomePageView">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel x:Name="ContentStack" MaxWidth="740" HorizontalAlignment="Center" Spacing="24">
+                        <TextBlock Text="Coming up" FontSize="24" FontFamily="Georgia" FontWeight="SemiBold" Foreground="#FFF4F4F6" />
+
+                        <Border
+                            CornerRadius="18"
+                            BorderBrush="#FF474B51"
+                            BorderThickness="1"
+                            Background="#A13A3D42"
+                            Padding="16">
+                            <StackPanel Spacing="14">
+                                <Grid ColumnSpacing="16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="138" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <TextBlock Text="12" FontSize="28" FontFamily="Georgia" Foreground="#FFF4F4F7" />
+                                            <StackPanel Margin="0,8,0,0">
+                                                <StackPanel Orientation="Horizontal" Spacing="4">
+                                                    <TextBlock Text="March" FontSize="14" FontWeight="SemiBold" Foreground="#FFF0F0F3" />
+                                                    <Ellipse Width="5" Height="5" Fill="#FFFF7F4D" VerticalAlignment="Center" />
+                                                </StackPanel>
+                                                <TextBlock Text="Thu" FontSize="12" Foreground="#FFB8BDC5" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Spacing="12">
+                                        <Grid ColumnSpacing="12">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="4" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Rectangle Width="4" Fill="#FF62A8FF" RadiusX="2" RadiusY="2" />
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock Text="StarwoodHotelsGPT - Agent Configuration Review" FontSize="13" FontWeight="SemiBold" Foreground="#FFF3F5F7" TextWrapping="WrapWholeWords" />
+                                                <TextBlock Text="3:00 - 3:30 PM" FontSize="11" Foreground="#FFAFB5BC" />
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <Grid ColumnSpacing="12">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="4" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Rectangle Width="4" Fill="#FF62D592" RadiusX="2" RadiusY="2" />
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock Text="Codex for Software Engineers - OpenAI Academy" FontSize="13" FontWeight="SemiBold" Foreground="#FFF3F5F7" TextWrapping="WrapWholeWords" />
+                                                <TextBlock Text="5:00 - 6:00 PM" FontSize="11" Foreground="#FFAFB5BC" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid ColumnSpacing="16" Margin="0,6,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="138" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <TextBlock Text="13" FontSize="28" FontFamily="Georgia" Foreground="#FFF4F4F7" />
+                                            <StackPanel Margin="0,8,0,0">
+                                                <TextBlock Text="March" FontSize="14" FontWeight="SemiBold" Foreground="#FFF0F0F3" />
+                                                <TextBlock Text="Fri" FontSize="12" Foreground="#FFB8BDC5" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Spacing="10">
+                                        <Grid ColumnSpacing="12">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="4" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Rectangle Width="4" Fill="#FF62D592" RadiusX="2" RadiusY="2" />
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock Text="Society 204" FontSize="13" FontWeight="SemiBold" Foreground="#FFF3F5F7" />
+                                                <TextBlock Text="9:30 AM - 12:00 PM" FontSize="11" Foreground="#FFAFB5BC" />
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <Grid ColumnSpacing="12">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="4" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Rectangle Width="4" Fill="#FF62A8FF" RadiusX="2" RadiusY="2" />
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock Text="Miami Dade Weekly Checkin" FontSize="13" FontWeight="SemiBold" Foreground="#FFF3F5F7" />
+                                                <TextBlock Text="11:00 AM - 12:00 PM" FontSize="11" Foreground="#FFAFB5BC" />
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <Grid ColumnSpacing="12">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="4" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Rectangle Width="4" Fill="#FF62A8FF" RadiusX="2" RadiusY="2" />
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock Text="Ward GPT Weekly Check In" FontSize="13" FontWeight="SemiBold" Foreground="#FFF3F5F7" />
+                                                <TextBlock Text="11:30 AM - 12:30 PM" FontSize="11" Foreground="#FFAFB5BC" />
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <Grid ColumnSpacing="12">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="4" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Rectangle Width="4" Fill="#FF62D592" RadiusX="2" RadiusY="2" />
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock Text="Eyefinity Daily Check-in" FontSize="13" FontWeight="SemiBold" Foreground="#FFF3F5F7" />
+                                                <TextBlock Text="2:00 - 2:30 PM" FontSize="11" Foreground="#FFAFB5BC" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="Today" FontSize="14" Foreground="#FF9FA6AF" />
+
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Width="34"
+                                    Height="34"
+                                    CornerRadius="8"
+                                    Background="#FFEBEEF1"
+                                    VerticalAlignment="Top">
+                                    <FontIcon Glyph="&#xE787;" Foreground="#FF798391" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="Broward Health / ProSourceIT AI Weekly Standup (Teams Meeting Only)" FontSize="13" FontWeight="SemiBold" Foreground="#FFF5F6F8" TextTrimming="CharacterEllipsis" />
+                                    <TextBlock Text="Abhi, Blakely, &amp; 10 others" FontSize="11" Foreground="#FF949BA4" />
+                                </StackPanel>
+                                <FontIcon Grid.Column="2" Glyph="&#xE735;" Foreground="#FF5EA7FF" FontSize="16" Margin="0,6,16,0" VerticalAlignment="Top" />
+                                <TextBlock Grid.Column="3" Text="10:00 AM" FontSize="11" Foreground="#FF9BA2AC" Margin="0,4,0,0" VerticalAlignment="Top" />
+                            </Grid>
+
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Width="34"
+                                    Height="34"
+                                    CornerRadius="8"
+                                    Background="#FF3C3E43"
+                                    VerticalAlignment="Top">
+                                    <FontIcon Glyph="&#xE70B;" Foreground="#FFAFB5BC" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="New note" FontSize="13" FontWeight="SemiBold" Foreground="#FFF5F6F8" />
+                                    <TextBlock Text="Me" FontSize="11" Foreground="#FF949BA4" />
+                                </StackPanel>
+                                <FontIcon Grid.Column="2" Glyph="&#xE72E;" Foreground="#FFD7DADD" FontSize="13" Margin="0,8,16,0" VerticalAlignment="Top" />
+                                <TextBlock Grid.Column="3" Text="9:43 AM" FontSize="11" Foreground="#FF9BA2AC" Margin="0,4,0,0" VerticalAlignment="Top" />
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Border
+                    Grid.Row="1"
+                    Margin="0,20,0,0"
+                    Background="#DD373A3E"
+                    BorderBrush="#663D4148"
+                    BorderThickness="1"
+                    CornerRadius="20"
+                    Padding="8">
+                    <Grid ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox
+                            Background="Transparent"
+                            BorderThickness="0"
+                            PlaceholderText="What did we talk about yesterday?"
+                            Foreground="#FFDCE0E4"
+                            PlaceholderForeground="#FFA7ADB5"
+                            FontSize="15"
+                            VerticalAlignment="Center" />
+
+                        <Button
+                            Grid.Column="1"
+                            Padding="10,4"
+                            CornerRadius="14"
+                            Background="#FF303338"
+                            BorderBrush="#66474C54"
+                            BorderThickness="1"
+                            Foreground="#FFE4E8EC">
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <Border Width="16" Height="16" CornerRadius="8" Background="#FF9AC778">
+                                    <TextBlock Text="/" Foreground="#FF1C2A1B" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
+                                </Border>
+                                <TextBlock Text="List recent todos" FontSize="14" FontWeight="SemiBold" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </Border>
+
+                </Grid>
+
+                <ScrollViewer
+                    x:Name="TeamPageView"
+                    Visibility="Collapsed"
+                    VerticalScrollBarVisibility="Auto"
+                    HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel MaxWidth="720" HorizontalAlignment="Center" Spacing="18" Margin="0,10,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Spacing="10">
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <Border Width="22" Height="22" CornerRadius="6" Background="#27303D">
+                                        <FontIcon Glyph="&#xE734;" Foreground="#FF5CA7FF" FontSize="11" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <TextBlock x:Name="TeamTitleText" Text="Broward Health" FontFamily="Georgia" FontSize="42" FontWeight="SemiBold" Foreground="#FFF2F4F6" />
+                                </StackPanel>
+                                <TextBlock Text="Everyone in your team has access" FontSize="13" Foreground="#FF9DA4AE" />
+                                <TextBlock Text="Add description" FontSize="13" Foreground="#FF9DA4AE" />
+                            </StackPanel>
+
+                            <Button
+                                Grid.Column="1"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Margin="18,6,0,0"
+                                Padding="12,4"
+                                CornerRadius="14"
+                                BorderThickness="1"
+                                BorderBrush="#553C4148"
+                                Background="#50313439"
+                                Foreground="#FFBFC5CD"
+                                Content="Integrations" />
+                        </Grid>
+
+                        <Border CornerRadius="16" BorderThickness="1" BorderBrush="#6642474F" Background="#B53A3D42" Padding="10">
+                            <StackPanel Spacing="10">
+                                <Border HorizontalAlignment="Left" CornerRadius="12" Background="#6634373D" BorderBrush="#663F454D" BorderThickness="1" Padding="8,4">
+                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                        <FontIcon Glyph="&#xE734;" Foreground="#FF5CA7FF" FontSize="10" />
+                                        <TextBlock x:Name="TeamFolderScopeText" Text="Broward Health" FontSize="12" FontWeight="SemiBold" Foreground="#FFE6EAF0" />
+                                        <TextBlock Text="Whole folder" FontSize="12" Foreground="#FF9DA4AE" />
+                                    </StackPanel>
+                                </Border>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Ask about folder" FontSize="22" Foreground="#FF9EA5AF" Margin="4,0,0,0" VerticalAlignment="Center" />
+                                    <Border Grid.Column="1" Width="30" Height="30" CornerRadius="15" Background="#3340464F" BorderBrush="#66505963" BorderThickness="1">
+                                        <FontIcon Glyph="&#xE720;" FontSize="14" Foreground="#FF9AA2AD" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Border CornerRadius="12" BorderThickness="1" BorderBrush="#66434952" Background="#66343A42" Padding="10,4">
+                                <TextBlock Text="Notes" FontSize="12" FontWeight="SemiBold" Foreground="#FFD8DCE2" />
+                            </Border>
+                            <Border CornerRadius="12" BorderThickness="1" BorderBrush="#553F444B" Background="#2A343A42" Padding="10,4">
+                                <TextBlock Text="Files" FontSize="12" Foreground="#FFA0A8B2" />
+                            </Border>
+                            <Border CornerRadius="12" BorderThickness="1" BorderBrush="#553F444B" Background="#2A343A42" Padding="10,4">
+                                <TextBlock Text="People" FontSize="12" Foreground="#FFA0A8B2" />
+                            </Border>
+                        </StackPanel>
+
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="Today" FontSize="14" Foreground="#FF9FA6AF" />
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Border Width="34" Height="34" CornerRadius="8" Background="#FFEBEEF1" VerticalAlignment="Top">
+                                    <FontIcon Glyph="&#xE787;" Foreground="#FF798391" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock x:Name="TeamMeetingTitleText" Text="Broward Health / ProSourceIT AI Weekly Standup (Teams Meeting Only)" FontSize="13" FontWeight="SemiBold" Foreground="#FFF5F6F8" TextTrimming="CharacterEllipsis" />
+                                    <TextBlock Text="Abhi, Blakely, &amp; 10 others" FontSize="11" Foreground="#FF949BA4" />
+                                </StackPanel>
+                                <FontIcon Grid.Column="2" Glyph="&#xE735;" Foreground="#FF5EA7FF" FontSize="16" Margin="0,6,16,0" VerticalAlignment="Top" />
+                                <TextBlock Grid.Column="3" Text="10:00 AM" FontSize="11" Foreground="#FF9BA2AC" Margin="0,4,0,0" VerticalAlignment="Top" />
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <ScrollViewer
+                    x:Name="SettingsPageView"
+                    Visibility="Collapsed"
+                    VerticalScrollBarVisibility="Auto"
+                    HorizontalScrollBarVisibility="Disabled">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="230" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border
+                            Grid.Column="0"
+                            Background="#CC1A1B1D"
+                            BorderBrush="#FF2E3136"
+                            BorderThickness="0,0,1,0"
+                            Padding="14,14,14,16">
+                            <Grid RowSpacing="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Row="0" HorizontalAlignment="Center" Spacing="4" Margin="0,6,0,0">
+                                    <Border Width="46" Height="46" CornerRadius="23" Background="#FFE5E7EA">
+                                        <TextBlock Text="SC" Foreground="#FF1D2025" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <TextBlock Text="Samuel Cavazos" FontSize="28" FontFamily="Georgia" FontWeight="SemiBold" Foreground="#FFF0F3F6" HorizontalAlignment="Center" />
+                                    <TextBlock Text="samuel@alshival.ai" FontSize="12" Foreground="#FFA7AEB8" HorizontalAlignment="Center" />
+                                </StackPanel>
+
+                                <Button
+                                    Grid.Row="1"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,4,0,0"
+                                    Padding="10,4"
+                                    CornerRadius="14"
+                                    Background="#22303542"
+                                    BorderBrush="#553D4450"
+                                    BorderThickness="1"
+                                    Foreground="#FFE3E8EE"
+                                    Content="Edit profile" />
+
+                                <TextBlock Grid.Row="2" Text="Preferences" Foreground="#FF9AA2AD" FontSize="12" Margin="0,8,0,0" />
+                                <Button
+                                    Grid.Row="3"
+                                    Height="32"
+                                    HorizontalAlignment="Stretch"
+                                    HorizontalContentAlignment="Left"
+                                    Padding="10,0"
+                                    CornerRadius="8"
+                                    Background="#FF2B2E33"
+                                    BorderThickness="0"
+                                    Foreground="#FFD9DDE2"
+                                    Content="Calendar" />
+
+                                <StackPanel Grid.Row="4" Spacing="7" Margin="2,0,0,0">
+                                    <TextBlock Text="Notifications" Foreground="#FFAFB6C0" FontSize="12" />
+                                    <TextBlock Text="Labs" Foreground="#FFAFB6C0" FontSize="12" />
+                                </StackPanel>
+
+                                <TextBlock Grid.Row="5" Text="Workspace" Foreground="#FF9AA2AD" FontSize="12" Margin="0,8,0,0" />
+                                <StackPanel Grid.Row="6" Spacing="7" Margin="2,0,0,0">
+                                    <TextBlock Text="General" Foreground="#FFAFB6C0" FontSize="12" />
+                                    <TextBlock Text="Team" Foreground="#FFAFB6C0" FontSize="12" />
+                                    <TextBlock Text="Billing" Foreground="#FFAFB6C0" FontSize="12" />
+                                </StackPanel>
+
+                                <TextBlock Grid.Row="7" Text="Support" Foreground="#FF9AA2AD" FontSize="12" Margin="0,8,0,0" />
+                                <StackPanel Grid.Row="8" Spacing="7" Margin="2,0,0,0">
+                                    <TextBlock Text="Help Center" Foreground="#FFAFB6C0" FontSize="12" />
+                                    <TextBlock Text="Send feedback" Foreground="#FFAFB6C0" FontSize="12" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Orientation="Horizontal" Spacing="8" Margin="16,10,0,0">
+                                <Button
+                                    x:Name="SettingsBackButton"
+                                    Width="28"
+                                    Height="24"
+                                    Padding="0"
+                                    Background="#332F343A"
+                                    BorderBrush="#553E444C"
+                                    BorderThickness="1"
+                                    CornerRadius="12">
+                                    <FontIcon Glyph="&#xE72B;" FontSize="10" Foreground="#FFD0D5DB" />
+                                </Button>
+                                <Button
+                                    Width="28"
+                                    Height="24"
+                                    Padding="0"
+                                    IsEnabled="False"
+                                    Background="#222B2F35"
+                                    BorderBrush="#443E444C"
+                                    BorderThickness="1"
+                                    CornerRadius="12">
+                                    <FontIcon Glyph="&#xE72A;" FontSize="10" Foreground="#889CA3AE" />
+                                </Button>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1" MaxWidth="900" Margin="22,14,24,24" Spacing="18">
+                                <TextBlock Text="Calendar" FontFamily="Georgia" FontSize="44" FontWeight="SemiBold" Foreground="#FFF2F4F6" />
+
+                                <TextBlock Text="Display" FontSize="14" Foreground="#FF99A2AD" />
+                                <Border
+                                    CornerRadius="14"
+                                    BorderThickness="1"
+                                    BorderBrush="#66434952"
+                                    Background="#A43A3D42"
+                                    Padding="14,10">
+                                    <Grid ColumnSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel>
+                                            <TextBlock Text="Show events with no participants" FontSize="14" FontWeight="SemiBold" Foreground="#FFE9ECF0" />
+                                            <TextBlock Text="'Coming up' section will include events without participants or a video link." FontSize="12" Foreground="#FF9FA7B1" />
+                                        </StackPanel>
+                                        <ToggleSwitch Grid.Column="1" IsOn="True" OnContent="" OffContent="" />
+                                    </Grid>
+                                </Border>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Visible calendars" FontSize="14" Foreground="#FF99A2AD" />
+                                    <TextBlock Grid.Column="1" Text="Reset" FontSize="14" Foreground="#FF97BF45" />
+                                </Grid>
+
+                                <Border
+                                    CornerRadius="14"
+                                    BorderThickness="1"
+                                    BorderBrush="#66434952"
+                                    Background="#A43A3D42"
+                                    Padding="14,10">
+                                    <StackPanel Spacing="10">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Calendar" FontSize="14" FontWeight="SemiBold" Foreground="#FFE9ECF0" />
+                                            <ToggleSwitch Grid.Column="1" IsOn="True" OnContent="" OffContent="" />
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Prosource" FontSize="14" FontWeight="SemiBold" Foreground="#FFE9ECF0" />
+                                            <ToggleSwitch Grid.Column="1" IsOn="True" OnContent="" OffContent="" />
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="United States holidays" FontSize="14" FontWeight="SemiBold" Foreground="#FFE9ECF0" />
+                                            <ToggleSwitch Grid.Column="1" OnContent="" OffContent="" />
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Birthdays" FontSize="14" FontWeight="SemiBold" Foreground="#FFE9ECF0" />
+                                            <ToggleSwitch Grid.Column="1" OnContent="" OffContent="" />
+                                        </Grid>
+                                        <TextBlock Text="Don't see the calendar you want? See how to connect other calendars." FontSize="12" Foreground="#FF9FA7B1" />
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </ScrollViewer>
+
+                <Grid x:Name="NotesPageView" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="24,12,24,0">
+                        <Grid Width="980" HorizontalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBox
+                                Grid.Row="0"
+                                x:Name="NoteTitleTextBox"
+                                PlaceholderText="New note"
+                                FontFamily="Georgia"
+                                FontSize="24"
+                                FontWeight="SemiBold"
+                                Background="Transparent"
+                                Foreground="#FFE6E8EA"
+                                PlaceholderForeground="#AAE6E8EA"
+                                BorderThickness="0"
+                                HorizontalAlignment="Stretch"
+                                Padding="0" />
+
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="8" Margin="0,14,0,0">
+                                <ComboBox
+                                    x:Name="NoteDateComboBox"
+                                    MinWidth="108"
+                                    SelectedIndex="0"
+                                    Background="#442E3238"
+                                    BorderBrush="#553B414A"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Foreground="#FFE0E4E8">
+                                    <ComboBoxItem Content="Today" />
+                                    <ComboBoxItem Content="Tomorrow" />
+                                    <ComboBoxItem Content="Next week" />
+                                </ComboBox>
+
+                                <ComboBox
+                                    x:Name="NoteAttendeesComboBox"
+                                    MinWidth="120"
+                                    SelectedIndex="0"
+                                    Background="#442E3238"
+                                    BorderBrush="#553B414A"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Foreground="#FFE0E4E8">
+                                    <ComboBoxItem Content="Me" />
+                                    <ComboBoxItem Content="Team" />
+                                    <ComboBoxItem Content="Abhi + me" />
+                                </ComboBox>
+
+                                <ComboBox
+                                    x:Name="NoteFolderComboBox"
+                                    MinWidth="160"
+                                    SelectedIndex="0"
+                                    Background="#442E3238"
+                                    BorderBrush="#553B414A"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Foreground="#FFE0E4E8">
+                                    <ComboBoxItem Content="Add to folder" />
+                                    <ComboBoxItem Content="Broward Health" />
+                                    <ComboBoxItem Content="Customer calls" />
+                                    <ComboBoxItem Content="Team meetings" />
+                                </ComboBox>
+                            </StackPanel>
+
+                            <TextBox
+                                Grid.Row="2"
+                                x:Name="NoteBodyTextBox"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                MinHeight="420"
+                                VerticalContentAlignment="Top"
+                                PlaceholderText="Write notes..."
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="0"
+                                Margin="0,14,0,0"
+                                HorizontalAlignment="Stretch"
+                                Foreground="#FFD8DDE2"
+                                PlaceholderForeground="#FF8A909A"
+                                FontSize="18" />
+                        </Grid>
+                    </ScrollViewer>
+
+                    <Grid Grid.Row="1" Width="980" HorizontalAlignment="Center" Margin="24,16,24,0" ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel VerticalAlignment="Center" Spacing="6">
+                            <Button
+                                x:Name="CaptureToggleButton"
+                                Padding="12,6"
+                                CornerRadius="16"
+                                Background="#DD373A3E"
+                                BorderBrush="#663D4148"
+                                BorderThickness="1"
+                                Foreground="#FFE4E8EC">
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <TextBlock x:Name="CaptureIndicatorText" Text="&#x25CF;" Foreground="#FF9BCB6D" FontSize="11" VerticalAlignment="Center" />
+                                    <TextBlock x:Name="CaptureButtonText" Text="Start live transcript" FontSize="13" FontWeight="SemiBold" />
+                                </StackPanel>
+                            </Button>
+                            <TextBlock
+                                x:Name="CaptureStatusText"
+                                Text="Ready to capture mic + system audio."
+                                Foreground="#FF8F97A1"
+                                FontSize="11"
+                                Margin="2,0,0,0" />
+                        </StackPanel>
+
+                        <Border
+                            Grid.Column="1"
+                            CornerRadius="20"
+                            Background="#DD373A3E"
+                            BorderBrush="#663D4148"
+                            BorderThickness="1"
+                            Padding="10,8">
+                            <TextBox
+                                x:Name="NoteAskTextBox"
+                                PlaceholderText="Ask anything"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="0"
+                                Foreground="#FFDCE0E4"
+                                PlaceholderForeground="#FFA7ADB5"
+                                FontSize="15" />
+                        </Border>
+
+                        <Button
+                            x:Name="SuggestTopicsButton"
+                            Grid.Column="2"
+                            Padding="12,6"
+                            CornerRadius="16"
+                            Background="#FF303338"
+                            BorderBrush="#66474C54"
+                            BorderThickness="1"
+                            Foreground="#FFE4E8EC"
+                            Content="Suggest topics" />
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
